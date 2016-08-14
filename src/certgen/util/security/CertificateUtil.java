@@ -67,7 +67,7 @@ public class CertificateUtil {
 	}
 	
 	/**
-	 * Generate certificate in X509v3 format.
+	 * Generate certificate in X.509v3 format.
 	 * Certificate is signed using <code>SHA256WithRSAEncryption</code> algorithm.
 	 * 
 	 * @param issuerData - information about issuer
@@ -110,7 +110,7 @@ public class CertificateUtil {
 	 * occurred, this method will return <code>null</code>.
 	 * 
 	 * @param filePath - path to file from which you want to read certificate
-	 * @return X.509 formated certificate of <code>null</code> if an error occurred
+	 * @return X.509 formated certificate or <code>null</code> if an error occurred
 	 */
 	public static Certificate readFromFile(String filePath) {
 		Certificate certificate = null;
@@ -141,10 +141,10 @@ public class CertificateUtil {
 	/**
 	 * Reads all certificates from file.
 	 * Returned certificates are in X.509 format. If an error occurred,
-	 * this method will return <code>null</code>
+	 * this method will return <code>null</code>.
 	 * 
 	 * @param filePath - path to file from which you want to read certificates
-	 * @return collection of X.509 formated certificates of <code>null</code> if an error occurred
+	 * @return collection of X.509 formated certificates or <code>null</code> if an error occurred
 	 */
 	public static Collection<? extends Certificate> readAllFromFile(String filePath) {
 		Collection<? extends Certificate> certificates = null;

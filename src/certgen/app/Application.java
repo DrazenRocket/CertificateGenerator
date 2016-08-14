@@ -1,7 +1,7 @@
 package certgen.app;
 
 /**
- * Class with method which represent entry 
+ * Class with method which represents entry 
  * point for application of this project.
  * 
  * @author Dražen Đanić

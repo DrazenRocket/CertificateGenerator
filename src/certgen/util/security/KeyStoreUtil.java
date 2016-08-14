@@ -23,11 +23,11 @@ public class KeyStoreUtil {
 	/**
 	 * Loads key store from specified file path or create new empty if 
 	 * parameter <code>filePath</code> has value <code>null</code>.
-	 * A <code>password</code> may be used to unlock key store.
+	 * A <code>password</code> may be used to unlock the key store.
 	 * If an error happened, this method will return <code>null</code>.
 	 * 
-	 * @param filePath - path to file from which key store will be loaded of null
-	 * 				   if you want empty key store
+	 * @param filePath - path to file from which key store will be loaded or null
+	 * 				     if you want empty key store
 	 * @param password - argument used to unlock key store
 	 * @return loaded key store or <code>null</code> if an error occurred
 	 */
@@ -67,7 +67,7 @@ public class KeyStoreUtil {
 	 * Saves passed key store in file which path is passed as argument and protects its integrity with the given password.
 	 * 
 	 * @param keyStore - key store which will be saved
-	 * @param filePath - path to file where key store will be save
+	 * @param filePath - path to file where key store will be saved
 	 * @param password - password which will be used to protect integrity 
 	 * @return indicator of success
 	 */
@@ -113,6 +113,29 @@ public class KeyStoreUtil {
 		
 		try {
 			keyStore.setKeyEntry(alias, privateKey, password, new Certificate[] {certificate});
+			
+			success = true;
+		} catch (KeyStoreException e) {
+			e.printStackTrace();
+		}
+		
+		return success;
+	}
+	
+	/**
+	 * Deletes the entry identified by the given alias from given key store.
+	 * 
+	 * @param keyStore - key store from which will be deleted entry
+	 * @param alias - the alias name
+	 * @return indicator of success
+	 */
+	public static boolean deleteEntry(KeyStore keyStore, String alias) {
+		boolean success = false;
+		
+		try {
+			keyStore.deleteEntry(alias);
+			
+			success = true;
 		} catch (KeyStoreException e) {
 			e.printStackTrace();
 		}
