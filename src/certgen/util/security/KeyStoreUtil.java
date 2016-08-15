@@ -123,6 +123,31 @@ public class KeyStoreUtil {
 	}
 	
 	/**
+	 * Assigns the given trusted certificate to the given alias in given key store.
+	 * If the given alias identifies an existing entry created by a call to setCertificateEntry, 
+	 * or created by a call to setEntry with a TrustedCertificateEntry, the trusted certificate 
+	 * in the existing entry is overridden by the given certificate. 
+	 * 
+	 * @param keyStore - the key store
+	 * @param alias - the alias name
+	 * @param certificate - the certificate
+	 * @return indicator of success
+	 */
+	public static boolean setCertificateEntry(KeyStore keyStore, String alias, Certificate certificate) {
+		boolean success = false;
+		
+		try {
+			keyStore.setCertificateEntry(alias, certificate);
+			
+			success = true;
+		} catch (KeyStoreException e) {
+			e.printStackTrace();
+		}
+		
+		return success;
+	}
+	
+	/**
 	 * Deletes the entry identified by the given alias from given key store.
 	 * 
 	 * @param keyStore - key store from which will be deleted entry
