@@ -9,8 +9,12 @@ import java.security.KeyStore;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
 import certgen.controller.action.ActionManager;
+import certgen.model.table.CertificateTableModel;
 import certgen.view.element.MainMenuBar;
 import certgen.view.element.MainToolBar;
 
@@ -28,6 +32,8 @@ public class MainFrame extends JFrame {
 	private String currentKSFilePath;
 	private boolean changedKS;
 	private ActionManager actionManager;
+	private JTable tblCertificate;
+	private JScrollPane scrCertificate;
 	
 	private MainFrame() {
 		
@@ -35,6 +41,11 @@ public class MainFrame extends JFrame {
 	
 	private void initialize() {	
 		actionManager = new ActionManager();
+		tblCertificate = new JTable(new CertificateTableModel());
+		tblCertificate.setRowSelectionAllowed(true);
+		tblCertificate.setColumnSelectionAllowed(false);
+		tblCertificate.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrCertificate = new JScrollPane(tblCertificate);
 		
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = toolkit.getScreenSize();
@@ -56,6 +67,7 @@ public class MainFrame extends JFrame {
 		});
 		setJMenuBar(new MainMenuBar(actionManager));
 		add(new MainToolBar(actionManager), BorderLayout.NORTH);
+		add(scrCertificate, BorderLayout.CENTER);
 	}
 	
 	/**
@@ -127,14 +139,14 @@ public class MainFrame extends JFrame {
 		return changedKS;
 	}
 	
-	/**
-	 * Sets new action manager.
-	 * 
-	 * @param actionManager - new action manager
-	 */
-	public void setActionManager(ActionManager actionManager) {
-		this.actionManager = actionManager;
-	}
+//	/**
+//	 * Sets new action manager.
+//	 * 
+//	 * @param actionManager - new action manager
+//	 */
+//	public void setActionManager(ActionManager actionManager) {
+//		this.actionManager = actionManager;
+//	}
 	
 	/**
 	 * Gets current action manager.
@@ -143,6 +155,27 @@ public class MainFrame extends JFrame {
 	 */
 	public ActionManager getActionManager() {
 		return actionManager;
+	}
+	
+//	/**
+//	 * Sets new table for certificates.
+//	 * 
+//	 * @param tblCertificate - new table
+//	 */
+//	public void setTblCertificate(JTable tblCertificate) {
+//		scrCertificate.removeAll();
+//		scrCertificate.add(tblCertificate);
+//		
+//		this.tblCertificate = tblCertificate;
+//	}
+	
+	/**
+	 * Gets current table for certificates.
+	 * 
+	 * @return current table for certificates
+	 */
+	public JTable getTblCertificate() {
+		return tblCertificate;
 	}
 
 }
