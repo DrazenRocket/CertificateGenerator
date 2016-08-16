@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
+import certgen.util.ImageUtil;
+
 /**
  * Extended AbstractAction class which performs necessary things for new saving key store to file.
  *  
@@ -17,6 +19,7 @@ public class SaveAsKeyStoreAction extends AbstractAction {
 	public SaveAsKeyStoreAction() {
 		putValue(NAME, "Save As Keystore");
 		putValue(SHORT_DESCRIPTION, "Save key store to new file");
+		putValue(SMALL_ICON, ImageUtil.loadImageIcon(getClass().getResource("/certgen/resource/img/save_as-icon.png"), 20, 20));
 	}
 
 	@Override

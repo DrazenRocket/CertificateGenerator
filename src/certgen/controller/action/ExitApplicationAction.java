@@ -1,8 +1,10 @@
 package certgen.controller.action;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.KeyStroke;
 
 import certgen.util.ImageUtil;
 
@@ -18,7 +20,8 @@ public class ExitApplicationAction extends AbstractAction {
 	public ExitApplicationAction() {
 		putValue(NAME, "Exit");
 		putValue(SHORT_DESCRIPTION, "Exit application");
-		putValue(SMALL_ICON, ImageUtil.loadImage(getClass().getResource("/certgen/resource/img/exit-icon.png"), 16, 16));
+		putValue(SMALL_ICON, ImageUtil.loadImageIcon(getClass().getResource("/certgen/resource/img/exit-icon.png"), 20, 20));
+		putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F4, ActionEvent.ALT_MASK));
 	}
 
 	@Override

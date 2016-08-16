@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  * Class for work with images.
@@ -31,6 +32,14 @@ public class ImageUtil {
 		}
 		
 		return image;
+	}
+	
+	public static ImageIcon loadImageIcon(URL url, int width, int height) {
+		ImageIcon imageIcon = null;
+		
+		imageIcon = new ImageIcon(loadImage(url, width, height));
+		
+		return imageIcon;
 	}
 	
 }
