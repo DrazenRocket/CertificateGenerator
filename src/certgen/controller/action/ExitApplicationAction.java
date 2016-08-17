@@ -4,9 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import certgen.util.ImageUtil;
+import certgen.view.frame.MainFrame;
 
 /**
  * Extended AbstractAction class which performs necessary things for exiting application. 
@@ -26,9 +28,20 @@ public class ExitApplicationAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO
-		// For now!
-		System.exit(0);
+		MainFrame mf = MainFrame.getInstance();
+		
+		if (mf.isChangedKS()) {
+			int answer = JOptionPane.showConfirmDialog(null, "Do you want to save chages of the current keystore first?", "Save changes?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+			
+			if (answer == JOptionPane.YES_OPTION) {
+				mf.getActionManager().getSaveKeyStoreAction().actionPerformed(null);
+				// TODO enable exiting after saving (it will require to add new methods in classes for save and save as) which will return indicator
+			} else if (answer == JOptionPane.NO_OPTION) {
+				System.exit(0);
+			}
+		} else {
+			System.exit(0);
+		}
 	}
 
 }

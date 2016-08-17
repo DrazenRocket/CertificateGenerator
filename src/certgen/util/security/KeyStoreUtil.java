@@ -47,16 +47,28 @@ public class KeyStoreUtil {
 				keyStore.load(null, password);
 			}
 		} catch (KeyStoreException e) {
+			keyStore = null;
+			
 			e.printStackTrace();
 		} catch (NoSuchProviderException e) {
+			keyStore = null;
+			
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
+			keyStore = null;
+			
 			e.printStackTrace();
 		} catch (NoSuchAlgorithmException e) {
+			keyStore = null;
+			
 			e.printStackTrace();
 		} catch (CertificateException e) {
+			keyStore = null;
+			
 			e.printStackTrace();
 		} catch (IOException e) {
+			keyStore = null;
+			
 			e.printStackTrace();
 		}
 				

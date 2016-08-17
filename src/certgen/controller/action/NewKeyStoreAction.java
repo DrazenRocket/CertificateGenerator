@@ -2,12 +2,15 @@ package certgen.controller.action;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.security.KeyStore;
 
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
+import certgen.model.table.CertificateTableModel;
 import certgen.util.ImageUtil;
+import certgen.util.security.KeyStoreUtil;
 import certgen.view.frame.MainFrame;
 
 /**
@@ -29,23 +32,32 @@ public class NewKeyStoreAction extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		MainFrame mf = MainFrame.getInstance();
-		boolean openKS = false;
+		boolean createNewKS = false;
 		
 		if (mf.isChangedKS()) {
-			int answer = JOptionPane.showConfirmDialog(null, "Do you want to save chages of current key store first?", "Save changes?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+			int answer = JOptionPane.showConfirmDialog(null, "Do you want to save chages of the current keystore first?", "Save changes?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
 			
 			if (answer == JOptionPane.YES_OPTION) {
 				mf.getActionManager().getSaveKeyStoreAction().actionPerformed(null);
-				// TODO enable opening after saving
+				// TODO enable creating after saving (it will require to add new methods in classes for save and save as) which will return indicator
 			} else if (answer == JOptionPane.NO_OPTION) {
-				openKS = true;
+				createNewKS = true;
 			}
 		} else {
-			openKS = true;
+			createNewKS = true;
 		}
 		
-		if (openKS) {
-			// TODO Open key store
+		if (createNewKS) {
+			KeyStore newKS = KeyStoreUtil.loadKeyStore(null, "password".toCharArray());
+			
+			if (newKS != null) {
+				mf.setCurrentKS(newKS);
+				mf.setCurrentKSFilePath(null);
+				mf.setChangedKS(true);
+				((CertificateTableModel) mf.getTblCertificate().getModel()).setRowCount(0);
+			} else {
+				JOptionPane.showMessageDialog(null, "An error has occurred while creating keystore!", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 
