@@ -13,14 +13,32 @@ import javax.swing.ImageIcon;
  * @author Dražen Đanić
  */
 public class ImageUtil {
+	
+	/**
+	 * Returns loaded image from given URL.
+	 * 
+	 * @param url - URL to image
+	 * @return loaded image or <code>null</code> if an error occurred
+	 */
+	public static Image loadImage(URL url) {
+		Image image = null;
+		
+		try {
+			image = ImageIO.read(url);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return image;
+	}
 
 	/**
-	 * Loads image from given URL and set its width and height to given width and height.
+	 * Returns loaded image from given URL and set its width and height to given width and height.
 	 * 
 	 * @param url - URL to image
 	 * @param width - the width to which to scale the image
 	 * @param height - the height to which to scale the image
-	 * @return loaded and scaled version of the image
+	 * @return loaded and scaled version of the image or <code>null</code> if an error occurred
 	 */
 	public static Image loadImage(URL url, int width, int height) {
 		Image image = null;
@@ -34,6 +52,14 @@ public class ImageUtil {
 		return image;
 	}
 	
+	/**
+	 * Returns loaded icon image from given URL and set its width and height to given width and height.
+	 * 
+	 * @param url - URL to image
+	 * @param width - the width to which to scale the image
+	 * @param height - the height to which to scale the image
+	 * @return loaded and scaled version of the icon image or <code>null</code> if an error occurred
+	 */
 	public static ImageIcon loadImageIcon(URL url, int width, int height) {
 		ImageIcon imageIcon = null;
 		
