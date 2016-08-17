@@ -2,11 +2,16 @@ package certgen.controller.action;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.security.KeyStore;
 
 import javax.swing.AbstractAction;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import certgen.util.ImageUtil;
+import certgen.util.security.KeyStoreUtil;
+import certgen.view.dialog.NewPasswordDialog;
+import certgen.view.frame.MainFrame;
 
 /**
  * Extended AbstractAction class which performs necessary things for saving key store to file. 
@@ -26,8 +31,31 @@ public class SaveKeyStoreAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		MainFrame mf = MainFrame.getInstance();
 		
+		if (mf.isChangedKS()) {
+			if (mf.getCurrentKSFilePath() != null) {
+				NewPasswordDialog npd = new NewPasswordDialog();
+				npd.setVisible(true);
+				
+				char[] newPassword = npd.getNewPassword();
+				npd.dispose();
+				
+				if (newPassword != null) {
+					KeyStore keyStore = mf.getCurrentKS();
+					String filePath = mf.getCurrentKSFilePath();
+					
+					boolean success = KeyStoreUtil.saveKeyStore(keyStore, filePath, newPassword);
+					if (success) {
+						mf.setChangedKS(false);
+					} else {
+						JOptionPane.showMessageDialog(null, "Some error has occured!", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			} else {
+				mf.getActionManager().getSaveAsKeyStoreAction().actionPerformed(null);
+			}
+		}
 	}
 
 }

@@ -4,9 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import certgen.util.ImageUtil;
+import certgen.view.frame.MainFrame;
 
 /**
  * Extended AbstractAction class which performs necessary things for creating new key store. 
@@ -26,8 +28,25 @@ public class NewKeyStoreAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		MainFrame mf = MainFrame.getInstance();
+		boolean openKS = false;
 		
+		if (mf.isChangedKS()) {
+			int answer = JOptionPane.showConfirmDialog(null, "Do you want to save chages of current key store first?", "Save changes?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+			
+			if (answer == JOptionPane.YES_OPTION) {
+				mf.getActionManager().getSaveKeyStoreAction().actionPerformed(null);
+				// TODO enable opening after saving
+			} else if (answer == JOptionPane.NO_OPTION) {
+				openKS = true;
+			}
+		} else {
+			openKS = true;
+		}
+		
+		if (openKS) {
+			// TODO Open key store
+		}
 	}
 
 }
