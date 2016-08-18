@@ -32,7 +32,7 @@ public class NewKeyStoreAction extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		MainFrame mf = MainFrame.getInstance();
-		boolean createNewKS = false;
+		boolean continueNewKS = false;
 		
 		if (mf.isChangedKS()) {
 			int answer = JOptionPane.showConfirmDialog(null, "Do you want to save chages of the current keystore first?", "Save changes?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -41,13 +41,13 @@ public class NewKeyStoreAction extends AbstractAction {
 				mf.getActionManager().getSaveKeyStoreAction().actionPerformed(null);
 				// TODO enable creating after saving (it will require to add new methods in classes for save and save as) which will return indicator
 			} else if (answer == JOptionPane.NO_OPTION) {
-				createNewKS = true;
+				continueNewKS = true;
 			}
 		} else {
-			createNewKS = true;
+			continueNewKS = true;
 		}
 		
-		if (createNewKS) {
+		if (continueNewKS) {
 			KeyStore newKS = KeyStoreUtil.loadKeyStore(null, "password".toCharArray());
 			
 			if (newKS != null) {

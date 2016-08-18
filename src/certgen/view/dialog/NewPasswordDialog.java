@@ -38,8 +38,7 @@ public class NewPasswordDialog extends JDialog {
 		setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
 		setResizable(false);
 		setModal(true);
-		setLayout(new MigLayout("fill"));
-		
+				
 		addComponents();
 		
 		pack();
@@ -47,8 +46,10 @@ public class NewPasswordDialog extends JDialog {
 	}
 	
 	private void addComponents() {
+		setLayout(new MigLayout("fill"));
+		
 		JPanel pnlHeader = new JPanel(new MigLayout("fill"));
-		pnlHeader.add(new JLabel("Enter New Password:"));
+		pnlHeader.add(new JLabel("Enter new password to lock"));
 		add(pnlHeader, "dock north");
 		
 		JPanel pnlCenter = new JPanel(new MigLayout("fill"));
@@ -91,6 +92,7 @@ public class NewPasswordDialog extends JDialog {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				newPassword = null;
 				setVisible(false);
 			}
 			

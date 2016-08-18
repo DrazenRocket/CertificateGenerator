@@ -29,6 +29,7 @@ public class ExitApplicationAction extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		MainFrame mf = MainFrame.getInstance();
+		boolean continueExit = false;
 		
 		if (mf.isChangedKS()) {
 			int answer = JOptionPane.showConfirmDialog(null, "Do you want to save chages of the current keystore first?", "Save changes?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -37,9 +38,13 @@ public class ExitApplicationAction extends AbstractAction {
 				mf.getActionManager().getSaveKeyStoreAction().actionPerformed(null);
 				// TODO enable exiting after saving (it will require to add new methods in classes for save and save as) which will return indicator
 			} else if (answer == JOptionPane.NO_OPTION) {
-				System.exit(0);
+				continueExit = true;
 			}
 		} else {
+			continueExit = true;
+		}
+		
+		if (continueExit) {
 			System.exit(0);
 		}
 	}
