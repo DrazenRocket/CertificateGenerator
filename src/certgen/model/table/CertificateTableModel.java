@@ -70,5 +70,24 @@ public class CertificateTableModel extends DefaultTableModel {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Returns an alias value for the cell at rowIndex.
+	 * If an error occurred, method will return <code>null</code>.
+	 * 	 
+	 * @param rowIndex -  the row index whose value (alias) is to be queried
+	 * @return the alias at the specified row
+	 */
+	public String getAliasAt(int rowIndex) {
+		String alias = null;
+		
+		try {
+			alias = getValueAt(rowIndex, 0).toString();
+		} catch (ArrayIndexOutOfBoundsException e) {
+			e.printStackTrace();
+		}
+		
+		return alias;
+	}
 
 }

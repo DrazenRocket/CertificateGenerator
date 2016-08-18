@@ -14,6 +14,7 @@ public class ActionManager {
 	private SaveAsKeyStoreAction saveAsKeyStoreAction;
 	private NewCertificateAction newCertificateAction;
 	private ExportCertificateAction exportCertificateAction;
+	private ShowCertificateAction showCertificateAction;
 
 	public ActionManager() {
 		initializeActions();
@@ -27,6 +28,7 @@ public class ActionManager {
 		saveAsKeyStoreAction = new SaveAsKeyStoreAction();
 		newCertificateAction = new NewCertificateAction();
 		exportCertificateAction = new ExportCertificateAction();
+		showCertificateAction = new ShowCertificateAction();
 	}
 	
 	public void setExitApplicationAction(ExitApplicationAction exitApplicationAction) {
@@ -83,6 +85,14 @@ public class ActionManager {
 	
 	public ExportCertificateAction getExportCertificateAction() {
 		return exportCertificateAction;
+	}
+	
+	public void setShowCertificateAction(ShowCertificateAction showCertificateAction) {
+		this.showCertificateAction = showCertificateAction;
+	}
+	
+	public ShowCertificateAction getShowCertificateAction() {
+		return showCertificateAction;
 	}
 	
 }

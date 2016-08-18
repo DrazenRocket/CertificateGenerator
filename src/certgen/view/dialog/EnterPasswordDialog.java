@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -30,7 +29,7 @@ public class EnterPasswordDialog extends JDialog {
 		
 		setIconImage(ImageUtil.loadImage(getClass().getResource("/certgen/resource/img/password-icon.png")));
 		setTitle("Enter Password");
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
 		setResizable(false);
 		setModal(true);
 		
@@ -89,7 +88,7 @@ public class EnterPasswordDialog extends JDialog {
 	 * Returns password which is entered by user.
 	 * If user cancel action, returns <code>null</code>.
 	 * 
-	 * @return entered password 
+	 * @return entered password or <code>null</code> if action is canceled
 	 */
 	public char[] getEnteredPassword() {
 		return enteredPassword;

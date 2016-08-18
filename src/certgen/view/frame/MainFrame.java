@@ -3,6 +3,8 @@ package certgen.view.frame;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.security.KeyStore;
@@ -68,6 +70,17 @@ public class MainFrame extends JFrame {
 		setJMenuBar(new MainMenuBar(actionManager));
 		add(new MainToolBar(actionManager), BorderLayout.NORTH);
 		add(scrCertificate, BorderLayout.CENTER);
+		
+		tblCertificate.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2 && e.getButton()==MouseEvent.BUTTON1) {
+					actionManager.getShowCertificateAction().actionPerformed(null);
+				}
+			}
+			
+		});
 	}
 	
 	/**
