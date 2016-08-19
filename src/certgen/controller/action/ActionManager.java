@@ -14,6 +14,7 @@ public class ActionManager {
 	private SaveAsKeyStoreAction saveAsKeyStoreAction;
 	private NewCertificateAction newCertificateAction;
 	private ExportCertificateAction exportCertificateAction;
+	private ImportCertificateAction importCertificateAction;
 	private ShowCertificateAction showCertificateAction;
 
 	public ActionManager() {
@@ -28,6 +29,7 @@ public class ActionManager {
 		saveAsKeyStoreAction = new SaveAsKeyStoreAction();
 		newCertificateAction = new NewCertificateAction();
 		exportCertificateAction = new ExportCertificateAction();
+		importCertificateAction = new ImportCertificateAction();
 		showCertificateAction = new ShowCertificateAction();
 	}
 	
@@ -85,6 +87,14 @@ public class ActionManager {
 	
 	public ExportCertificateAction getExportCertificateAction() {
 		return exportCertificateAction;
+	}
+	
+	public void setImportCertificateAction(ImportCertificateAction importCertificateAction) {
+		this.importCertificateAction = importCertificateAction;
+	}
+	
+	public ImportCertificateAction getImportCertificateAction() {
+		return importCertificateAction;
 	}
 	
 	public void setShowCertificateAction(ShowCertificateAction showCertificateAction) {

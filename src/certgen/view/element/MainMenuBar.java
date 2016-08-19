@@ -30,6 +30,7 @@ public class MainMenuBar extends JMenuBar {
 		mnuTools.setMnemonic('T');
 		mnuTools.add(actionManager.getNewCertificateAction());
 		mnuTools.add(actionManager.getExportCertificateAction());
+		mnuTools.add(actionManager.getImportCertificateAction());
 		mnuTools.add(actionManager.getShowCertificateAction());
 		add(mnuTools);
 	}
