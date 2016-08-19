@@ -43,7 +43,7 @@ public class NewCertificateDialog extends JDialog {
 	public NewCertificateDialog(KeyStore keyStore) {
 		this.keyStore = keyStore;
 		cmbIssuer = new JComboBox<String>(KeyStoreUtil.getKeyEntryAliases(keyStore));
-		chkSelfSigned = new JCheckBox("Self signed: ");
+		chkSelfSigned = new JCheckBox();
 		chkSelfSigned.setHorizontalTextPosition(SwingConstants.LEFT);
 		txfName = new JTextField(20);
 		txfSurname = new JTextField(20);
@@ -53,8 +53,8 @@ public class NewCertificateDialog extends JDialog {
 		txfCountry = new JTextField(2);
 		txfEmail = new JTextField(20);
 		txfUserID = new JTextField(20);
-		txfValidFor = new JTextField(20);
-		
+		txfValidFor = new JTextField(20); 
+				
 		setIconImage(ImageUtil.loadImage(getClass().getResource("/certgen/resource/img/new_certificate-icon.png")));
 		setTitle("New Certificate");
 		setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
@@ -77,6 +77,7 @@ public class NewCertificateDialog extends JDialog {
 		JPanel pnlCenter = new JPanel(new MigLayout("fill"));
 		pnlCenter.add(new JLabel("Issuer: "));
 		pnlCenter.add(cmbIssuer, "wrap");
+		pnlCenter.add(new JLabel("Self Signed: "));
 		pnlCenter.add(chkSelfSigned, "wrap");
 		pnlCenter.add(new JLabel("Name: "));
 		pnlCenter.add(txfName, "wrap");
@@ -98,9 +99,6 @@ public class NewCertificateDialog extends JDialog {
 		pnlCenter.add(txfValidFor, "wrap");
 		add(pnlCenter, "dock center");
 		
-		// JScrollPane scrCenter = new JScrollPane(pnlCenter);
-		// add(scrCenter, "dock center");
-		
 		JPanel pnlFooter = new JPanel(new MigLayout("fill"));
 		JButton btnOk = new JButton("OK");
 		JButton btnCancel = new JButton("Cancel");
@@ -108,6 +106,20 @@ public class NewCertificateDialog extends JDialog {
 		pnlFooter.add(btnCancel);
 		add(pnlFooter, "dock south");
 		
+		if (cmbIssuer.getItemCount() == 0) {
+			cmbIssuer.setEnabled(false);
+			chkSelfSigned.setSelected(true);
+			chkSelfSigned.setEnabled(false);
+		}
+		
+		chkSelfSigned.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cmbIssuer.setEnabled(!chkSelfSigned.isSelected());
+			}
+			
+		});
 		btnOk.addActionListener(new ActionListener() {
 			
 			@Override
@@ -127,6 +139,12 @@ public class NewCertificateDialog extends JDialog {
 		});
 	}
 	
+	/**
+	 * Returns <code>true</code> if the certificate is created.
+	 * Otherwise <code>false</code>
+	 * 
+	 * @return indicator
+	 */
 	public boolean isCreated() {
 		return created;
 	}
