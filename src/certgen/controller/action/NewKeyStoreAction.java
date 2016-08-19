@@ -51,10 +51,12 @@ public class NewKeyStoreAction extends AbstractAction {
 			KeyStore newKS = KeyStoreUtil.loadKeyStore(null, "password".toCharArray());
 			
 			if (newKS != null) {
+				// Successfully created 
 				mf.setCurrentKS(newKS);
 				mf.setCurrentKSFilePath(null);
 				mf.setChangedKS(true);
 				((CertificateTableModel) mf.getTblCertificate().getModel()).setRowCount(0);
+				mf.refreshStatusBar();
 			} else {
 				JOptionPane.showMessageDialog(null, "An error has occurred while creating keystore!", "Error", JOptionPane.ERROR_MESSAGE);
 			}

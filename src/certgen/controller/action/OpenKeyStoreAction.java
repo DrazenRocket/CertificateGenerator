@@ -70,12 +70,13 @@ public class OpenKeyStoreAction extends AbstractAction {
 						openKS = KeyStoreUtil.loadKeyStore(openKSPath, enteredPassword);
 						
 						if (openKS != null) {
-							// Success open
+							// Successfully opened 
 							mf.setCurrentKS(openKS);
 							mf.setCurrentKSFilePath(openKSPath);
 							mf.setChangedKS(false);
 							((CertificateTableModel) mf.getTblCertificate().getModel()).setRowCount(0);
 							((CertificateTableModel) mf.getTblCertificate().getModel()).addRows(openKS);
+							mf.refreshStatusBar();
 						} else {
 							JOptionPane.showMessageDialog(null, "An error has occurred while opening keystore! \nMaybe you have typed wrong password.", "Error", JOptionPane.ERROR_MESSAGE);
 						}

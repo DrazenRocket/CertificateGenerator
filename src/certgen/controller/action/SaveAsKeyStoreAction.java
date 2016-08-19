@@ -58,8 +58,10 @@ public class SaveAsKeyStoreAction extends AbstractAction {
 					boolean successSave = KeyStoreUtil.saveKeyStore(mf.getCurrentKS(), selectedKSPath, newPassword);
 					
 					if (successSave) {
+						// Successfully saved 
 						mf.setCurrentKSFilePath(selectedKSPath);
 						mf.setChangedKS(false);
+						mf.refreshStatusBar();
 					} else {
 						JOptionPane.showMessageDialog(null, "An error has occurred while saving keystore!", "Error", JOptionPane.ERROR_MESSAGE);
 					}
