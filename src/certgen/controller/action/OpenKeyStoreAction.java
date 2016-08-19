@@ -65,7 +65,7 @@ public class OpenKeyStoreAction extends AbstractAction {
 					
 					enteredPassword = epd.getEnteredPassword();
 					epd.dispose();
-					
+
 					if (enteredPassword != null) {
 						openKS = KeyStoreUtil.loadKeyStore(openKSPath, enteredPassword);
 						

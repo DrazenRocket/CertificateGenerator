@@ -11,6 +11,8 @@ import java.security.NoSuchProviderException;
 import java.security.PrivateKey;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
+import java.util.Enumeration;
+import java.util.Vector;
 
 /**
  * Class which offers methods for basic manipulations with key stores.
@@ -178,6 +180,32 @@ public class KeyStoreUtil {
 		}
 		
 		return success;
+	}
+	
+	/**
+	 * Get all aliases from key store which is used with key entries.
+	 * 
+	 * @param keyStore - key store
+	 * @return aliases used with key entries
+	 */
+	public static Vector<String> getKeyEntryAliases(KeyStore keyStore) {
+		Vector<String> keyEntryAliases = new Vector<String>();
+		
+		try {
+			Enumeration<String> aliases = keyStore.aliases();
+			
+			while (aliases.hasMoreElements()) {
+				String alias = aliases.nextElement();
+				
+				if (keyStore.isKeyEntry(alias)) {
+					keyEntryAliases.add(alias);
+				}
+			}
+		} catch (KeyStoreException e) {
+			e.printStackTrace();
+		}
+		
+		return keyEntryAliases;
 	}
 	
 }
