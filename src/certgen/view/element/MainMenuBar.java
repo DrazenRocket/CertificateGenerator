@@ -33,6 +33,11 @@ public class MainMenuBar extends JMenuBar {
 		mnuTools.add(actionManager.getImportCertificateAction());
 		mnuTools.add(actionManager.getShowCertificateAction());
 		add(mnuTools);
+		
+		JMenu mnuHelp = new JMenu("Help");
+		mnuHelp.setMnemonic('H');
+		mnuHelp.add(actionManager.getAboutApplicationAction());
+		add(mnuHelp);
 	}
 
 }

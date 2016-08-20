@@ -16,6 +16,7 @@ public class ActionManager {
 	private ExportCertificateAction exportCertificateAction;
 	private ImportCertificateAction importCertificateAction;
 	private ShowCertificateAction showCertificateAction;
+	private AboutApplicationAction aboutApplicationAction;
 
 	public ActionManager() {
 		initializeActions();
@@ -31,6 +32,7 @@ public class ActionManager {
 		exportCertificateAction = new ExportCertificateAction();
 		importCertificateAction = new ImportCertificateAction();
 		showCertificateAction = new ShowCertificateAction();
+		aboutApplicationAction = new AboutApplicationAction();
 	}
 	
 	public void setExitApplicationAction(ExitApplicationAction exitApplicationAction) {
@@ -103,6 +105,14 @@ public class ActionManager {
 	
 	public ShowCertificateAction getShowCertificateAction() {
 		return showCertificateAction;
+	}
+	
+	public void setAboutApplicationAction(AboutApplicationAction aboutApplicationAction) {
+		this.aboutApplicationAction = aboutApplicationAction;
+	}
+	
+	public AboutApplicationAction getAboutApplicationAction() {
+		return aboutApplicationAction;
 	}
 	
 }
