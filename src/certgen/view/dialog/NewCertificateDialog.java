@@ -207,6 +207,29 @@ public class NewCertificateDialog extends JDialog {
 					c.add(Calendar.DATE, validForInt);
 					Date validToDate = c.getTime();
 					
+					if (!selfSigned && issuer!=null) {
+						try {
+							Date issuerValidToDate = ((X509Certificate) keyStore.getCertificate(issuer)).getNotAfter();
+							System.out.println(issuerValidToDate);
+							if (validOfDate.compareTo(issuerValidToDate) > 0) {
+								JOptionPane.showMessageDialog(null, "You can't use selcted issuer because its certificate expired.", "Error", JOptionPane.ERROR_MESSAGE);
+								
+								return;
+							}
+							
+							if (validToDate.compareTo(issuerValidToDate) > 0) {
+								JOptionPane.showMessageDialog(null, "Filed 'Valid For' is too big because issuer's certificate doesn't cover it.", "Error", JOptionPane.ERROR_MESSAGE);
+								
+								return;
+							}
+						} catch (KeyStoreException e2) {
+							e2.printStackTrace();
+							JOptionPane.showMessageDialog(null, "Keystore is not loaded!", "Error", JOptionPane.ERROR_MESSAGE);
+							
+							return;
+						}
+					}
+					
 					X500NameBuilder builderSubject = new X500NameBuilder(BCStyle.INSTANCE);
 					builderSubject.addRDN(BCStyle.NAME, name);
 					builderSubject.addRDN(BCStyle.SURNAME, surname);
