@@ -300,7 +300,7 @@ public class NewCertificateDialog extends JDialog {
 						String certificateAlias = null;
 						
 						while (tryAgain) {
-							certificateAlias = JOptionPane.showInputDialog(null, "Enter alias for new certificate which will be use to add it in the cuccent keystore", "Alias For Certificate", JOptionPane.ERROR_MESSAGE);
+							certificateAlias = JOptionPane.showInputDialog(null, "Enter alias for new certificate which will be use to add it in the cuccent keystore", "Alias For Certificate", JOptionPane.QUESTION_MESSAGE);
 						
 							if (certificateAlias != null) {
 								// Button OK
